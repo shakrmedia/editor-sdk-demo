@@ -1,15 +1,12 @@
 require('dotenv').config();
 
-const express = require('express');
 const fs = require('fs');
+const express = require('express');
 
 const ShakrAPI = require('./lib/shakr-api');
+const generateCertificate = require('./lib/certificate');
 
-const options = {
-    key: fs.readFileSync('./server.key'),
-    cert: fs.readFileSync('./server.cert')
-};
-
+const options = generateCertificate();
 const app = express();
 const shakrAPI = new ShakrAPI({
     client_id: process.env.SHAKR_CLIENT_ID,

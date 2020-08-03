@@ -6,8 +6,6 @@
 
 2. Copy the example `.env` file (`.env.exmaple`) to `.env` and replace placeholders with your client ID, client secret and template style version ID.
 
-3. Add `server.key`/`server.cert` TLS key/certificate files in project root directory in order to run https server.
+3. Run Node.js server via `npm run start` or `yarn start`.
 
-4. Run Node.js server via `npm run start` or `yarn start`.
-
-5. Open `https://localhost:3000` in browser.
+4. Open `https://localhost:3000` in browser.
