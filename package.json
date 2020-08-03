@@ -1,0 +1,16 @@
+{
+  "name": "editor-sdk-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/shakrmedia/editor-sdk-demo.git",
+  "author": "Jeonghwan Lee <jeonghwan@sha.kr>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
