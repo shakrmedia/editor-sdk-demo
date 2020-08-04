@@ -17,3 +17,14 @@ Shakr Editor SDK only allows embedding inside secure domain that uses HTTPS. Whe
 1. Copy the example `.env` file (`.env.exmaple`) to `.env` and replace placeholders with your client ID, client secret and template\_style\_version\_id. You can use example template\_style\_version\_id `q6DNiM` on testing.
 1. Run Node.js server via `npm run start` or `yarn start`.
 1. Open `https://localhost:3000` in browser.
+
+
+## Example codes for Editor SDK implementation
+
+### [lib/shakr-api.js](lib/shakr-api.js)
+
+This Node.js source file contains functions to acquire server-side token, and create a Show object with template\_style\_version\_id and edit\_token option.
+
+- [public/index.html](public/index.html)
+
+This HTML source file includes \<script\> tag of Editor SDK, code to create a new Shakr.Editor object and launching it.
