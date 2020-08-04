@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 body {
     display: flex;
     width: 100%;
@@ -7,6 +9,8 @@ body {
     flex-flow: column;
     padding: 0;
     margin: 0;
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 }
 .sh-btn {
     border: none;
