@@ -22,5 +22,5 @@ app.post('/api/videos', async (_, res) => {
 });
 
 require('https').createServer(options, app).listen(3000, () => {
-    console.log('Server started on port 3000');
+    console.log('HTTPS server started at https://localhost:3000');
 });
