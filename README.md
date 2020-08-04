@@ -25,6 +25,6 @@ Shakr Editor SDK only allows embedding inside secure domain that uses HTTPS. Whe
 
 This Node.js source file contains functions to acquire server-side token, and create a Show object with template\_style\_version\_id and edit\_token option.
 
-- [public/index.html](public/index.html)
+### [public/index.html](public/index.html)
 
 This HTML source file includes \<script\> tag of Editor SDK, code to create a new Shakr.Editor object and launching it.
