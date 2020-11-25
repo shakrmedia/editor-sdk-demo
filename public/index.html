@@ -7,11 +7,10 @@
             window.onload = () => {
                 document.querySelector('#start-editor').addEventListener('click', async () => {
                     const res = await fetch('/api/videos', { method: 'POST' });
-                    const { show_id, edit_token } = await res.json();
 
                     new Shakr.Editor({
                         access_token: edit_token,
-                        show_id,
+                        render_session_id,
                         api_url: 'https://api.shakr.com/v2'
                     }).launch();
                 }, false);

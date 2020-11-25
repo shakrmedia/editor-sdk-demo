@@ -23,7 +23,11 @@ Shakr Editor SDK only allows embedding inside secure domain that uses HTTPS. Whe
 
 ### [lib/shakr-api.js](lib/shakr-api.js)
 
-This Node.js source file contains functions to acquire server-side token, and create a Show object with template\_style\_version\_id and edit\_token option.
+This Node.js source file contains functions to acquire server-side token, and create a Render Session object with template\_style\_version\_id and edit\_token option.
+
+### [lib/default-mapping-resources.json](lib/default-mapping-resources.json)
+
+Default mapping resource file used for creating Render Session with prefilled editables.
 
 ### [public/index.html](public/index.html)
 
