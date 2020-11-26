@@ -32,3 +32,10 @@ Default mapping resource file used for creating Render Session with prefilled ed
 ### [public/index.html](public/index.html)
 
 This HTML source file includes \<script\> tag of Editor SDK, code to create a new Shakr.Editor object and launching it.
+
+### [public/media-library.json](public/media-library.json)
+
+Example media library data for custom media library feature example.
+Example images from [Unsplash](unsplash.com)
+- https://unsplash.com/photos/12mi25fTAmM
+- https://unsplash.com/photos/zwe--GYIZtc
