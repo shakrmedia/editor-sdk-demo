@@ -2,114 +2,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="index.css">
-        <script src="https://sdk.shakr.com/sdk.js"></script>
-        <script>
-            async function loadMedias() {
-                const res = await fetch('/media-library.json', { method: 'GET' });
-                const medias = await res.json();
-
-                return medias;
-            }
-
-            async function openMediaLibrary(callback) {
-                const media_library_modal = document.querySelector('#media-library-modal');
-                const media_library_loader = document.querySelector('#media-library-loader');
-                const media_library_list = document.querySelector('#media-library-list');
-                const media_library_close = document.querySelector('#media-library-close');
-
-                Array.from(media_library_list.children).forEach(child => {
-                    media_library_list.removeChild(child);
-                });
-
-                media_library_modal.style.display = 'flex';
-                media_library_loader.style.display = 'block';
-
-                const medias = await loadMedias();
-
-                media_library_loader.style.display = 'none';
-
-                medias.forEach(media => {
-                    const item = document.createElement('button');
-                    const thumb = document.createElement('img');
-
-                    thumb.src = media.thumb;
-
-                    item.onclick = () => {
-                        media_library_modal.style.display = 'none';
-
-                        callback({ medias: [media] });
-                    };
-
-                    item.appendChild(thumb);
-                    media_library_list.appendChild(item);
-                });
-
-                media_library_close.onclick = () => {
-                    media_library_modal.style.display = 'none';
-                };
-            }
-
-            window.onload = () => {
-                document.querySelector('#start-editor').addEventListener('click', async () => {
-                    const res = await fetch('/api/videos', { method: 'POST' });
-                    const { render_session_id, edit_token } = await res.json();
-
-                    new Shakr.Editor({
-                        access_token: edit_token,
-                        render_session_id,
-                        api_url: 'https://api.shakr.com/v2',
-                        media_libraries: [
-                            {
-                                id: 'test',
-                                title: 'Test',
-                                media_type: 'image',
-                                custom_ui: false
-                            },
-                            {
-                                id: 'test-custom',
-                                title: 'Test Custom UI',
-                                media_type: 'image',
-                                custom_ui: true
-                            }
-                        ],
-                        language: 'en'
-                    })
-                    .on('get_media', async ({ search_term, page, callback }) => {
-                        const medias = await loadMedias();
-
-                        callback({
-                            medias: search_term ? medias.filter(media => media.title.includes(search_term)) : medias,
-                            page_total: 1
-                        });
-                    })
-                    .on('open_media_library', ({ callback }) => {
-                        openMediaLibrary(callback);
-                    })
-                    .launch();
-                }, false);
-            }
-        </script>
     </head>
     <body>
         <h1>Shakr Editor SDK Demo</h1>
-        <p>Press button below to open Shakr Editor embedded by SDK.</p>
-        <button class="sh-btn" id="start-editor">Start Editor</button>
 
-        <div id="media-library-modal" class="fullpage-modal-container">
-            <div class="fullpage-overlay"></div>
-            <div class="fullpage-modal">
-                <section class="modal-header">
-                    <h3>Sample Media Library</h3>
-                </section>
-                <section class="modal-content">
-                    <span id="media-library-loader" class="loader"></span>
-                    <div id="media-library-list" class="media-list"></div>
-                </section>
-                <button id="media-library-close" class="close-btn">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
-        </div>
+        <ul>
+            <li>
+                <a href="./examples/basic">Basic</a>
+            </li>
+            <li>
+                <a href="./examples/prefill-resources">Prefill Resources</a>
+            </li>
+            <li>
+                <a href="./examples/media-library">Media Library</a>
+            </li>
+            <li>
+                <a href="./examples/media-library-custom">Media Library Custom UI</a>
+            </li>
+        </ul>
     </body>
 </html>
