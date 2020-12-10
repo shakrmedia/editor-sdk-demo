@@ -2,25 +2,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="index.css">
-        <script src="https://sdk.shakr.com/sdk.js"></script>
-        <script>
-            window.onload = () => {
-                document.querySelector('#start-editor').addEventListener('click', async () => {
-                    const res = await fetch('/api/videos', { method: 'POST' });
-                    const { show_id, edit_token } = await res.json();
-
-                    new Shakr.Editor({
-                        access_token: edit_token,
-                        show_id,
-                        api_url: 'https://api.shakr.com/v2'
-                    }).launch();
-                }, false);
-            }
-        </script>
     </head>
     <body>
         <h1>Shakr Editor SDK Demo</h1>
-        <p>Press button below to open Shakr Editor embedded by SDK.</p>
-        <button class="sh-btn" id="start-editor">Start Editor</button>
+
+        <ul>
+            <li>
+                <a href="./examples/basic">Basic</a>
+            </li>
+            <li>
+                <a href="./examples/prefill-resources">Prefill Resources</a>
+            </li>
+            <li>
+                <a href="./examples/media-library">Media Library</a>
+            </li>
+            <li>
+                <a href="./examples/media-library-custom">Media Library Custom UI</a>
+            </li>
+        </ul>
     </body>
 </html>

@@ -1,10 +1,11 @@
 require('dotenv').config();
 
-const fs = require('fs');
 const express = require('express');
 
 const ShakrAPI = require('./lib/shakr-api');
 const generateCertificate = require('./lib/certificate');
+
+const SHAKR_TEMPLATE_STYLE_VERSION_ID = '8KX3s4';
 
 const options = generateCertificate();
 const app = express();
@@ -14,9 +15,10 @@ const shakrAPI = new ShakrAPI({
 });
 
 app.use(express.static('public'));
+app.use(express.json());
 
-app.post('/api/videos', async (_, res) => {
-    const edit_token_obj = await shakrAPI.createEditToken(process.env.SHAKR_TEMPLATE_STYLE_VERSION_ID);
+app.post('/api/videos', async (req, res) => {
+    const edit_token_obj = await shakrAPI.createEditToken(SHAKR_TEMPLATE_STYLE_VERSION_ID, req.body);
 
     res.json(edit_token_obj);
 });

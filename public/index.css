@@ -12,39 +12,16 @@ body {
 
     font-family: "Inter", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 }
-.sh-btn {
-    border: none;
-    background: none;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 38px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 0.02em;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: -0.01em;
-    color: #fff;
-    background-color: #06ace4;
-    border-radius: 200px;
-    transition-property: color, background-color;
-    transition-duration: 0.2s;
-    cursor: pointer;
-    height: 42px;
-    padding-left: 21px;
-    padding-right: 21px;
+
+ul {
+    display: flex;
+    list-style: none;
 }
-.sh-btn:hover {
-    text-decoration: none;
-    background-color: #05a4d7;
-    color: #fff;
-    transition-duration: 0s;
+
+li {
+    margin: 10px;
 }
-.sh-btn:hover
-.sh-btn:active,
-.sh-btn.active {
-    background-color: #049bc9;
-    color: #fff;
+
+a {
+    color: #06ace4;
 }
