@@ -34,7 +34,7 @@
                         const medias = await loadMedias();
 
                         callback({
-                            medias: search_term ? medias.filter(media => media.title.includes(search_term)) : medias,
+                            medias: search_term ? medias.filter(media => media.title.includes(search_term)) : medias, // 'get_media' event is emitted with empty string search_term for full list search
                             page_total: 1
                         });
                     })
