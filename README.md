@@ -39,6 +39,9 @@ Example images from [Unsplash](unsplash.com)
 #### [Basic](public/examples/basic)
 Most basic example that has codes to launch Shakr Editor with SDK.
 
+#### [Theme Customization](public/examples/theme-customize)
+Example code to launch SDK Shakr Editor with customized theme.
+
 #### [Prefill Resources](public/examples/prefill-resources)
 This example has codes to prefill resource before launching Shakr Editor.
 
