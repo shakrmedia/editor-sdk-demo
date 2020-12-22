@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://sdk.shakr.com/sdk.js"></script>
+        <script>
+            window.onload = () => {
+                document.querySelector('#start-editor').addEventListener('click', async () => {
+                    const res = await fetch('/api/videos', { method: 'POST' });
+                    const { render_session_id, edit_token } = await res.json();
+
+                    new Shakr.Editor({
+                        access_token: edit_token,
+                        render_session_id,
+                        api_url: 'https://api.shakr.com/v2',
+                        theme: {
+                            appearance: 'light',
+                            accent_color: 'FF007B'
+                        }
+                    }).launch();
+                }, false);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Shakr Editor SDK Theme Customization</h1>
+        <p>Press button below to open Shakr Editor embedded by SDK.</p>
+        <button class="sh-btn" id="start-editor">Start Editor</button>
+    </body>
+</html>
