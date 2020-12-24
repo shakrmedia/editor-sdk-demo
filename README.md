@@ -42,6 +42,9 @@ Most basic example that has codes to launch Shakr Editor with SDK.
 #### [Theme Customization](public/examples/theme-customize)
 Example code to launch SDK Shakr Editor with customized theme.
 
+#### [Wait Rendering](public/examples/wait-rendering)
+Example code to show render progress after finishing editing session and display download link after closing Shakr Editor.
+
 #### [Prefill Resources](public/examples/prefill-resources)
 This example has codes to prefill resource before launching Shakr Editor.
 

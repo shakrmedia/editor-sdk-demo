@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://sdk.shakr.com/sdk.js"></script>
+        <script>
+            window.onload = () => {
+                const start_editor_button_el = document.querySelector('#start-editor');
+
+                start_editor_button_el.addEventListener('click', async () => {
+                    const res = await fetch('/api/videos', { method: 'POST' });
+                    const { render_session_id, edit_token } = await res.json();
+
+                    new Shakr.Editor({
+                        access_token: edit_token,
+                        render_session_id,
+                        api_url: 'https://api.shakr.com/v2',
+                        wait_rendering: true
+                    })
+                    .on('finish', ({ video_download_url }) => {
+                        const download_video_el = document.querySelector('#download-video');
+
+                        download_video_el.setAttribute('href', video_download_url);
+                        download_video_el.style.display = 'block';
+                        start_editor_button_el.style.display = 'none';
+                    })
+                    .launch();
+                }, false);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Shakr Editor SDK Wait Rendering Demo</h1>
+        <p>Press button below to open Shakr Editor embedded by SDK.</p>
+        <button class="sh-btn" id="start-editor">Start Editor</button>
+        <a id="download-video" download="video.mp4" target="_blank" style="display: none">Download Video</a>
+    </body>
+</html>
