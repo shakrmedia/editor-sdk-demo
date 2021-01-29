@@ -11,7 +11,7 @@
                     const res = await fetch('/api/videos', { method: 'POST' });
                     const { render_session_id, edit_token } = await res.json();
 
-                    new Shakr.Editor({
+                    new ShakrEditor({
                         access_token: edit_token,
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2',
