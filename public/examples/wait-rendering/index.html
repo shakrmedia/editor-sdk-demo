@@ -11,13 +11,14 @@
                     const res = await fetch('/api/videos', { method: 'POST' });
                     const { render_session_id, edit_token } = await res.json();
 
-                    new ShakrEditor({
+                    const editor = await createShakrEditor({
                         access_token: edit_token,
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2',
                         wait_rendering: true
-                    })
-                    .on('finish', ({ video_download_url }) => {
+                    });
+
+                    editor.on('finish', ({ video_download_url }) => {
                         const download_video_el = document.querySelector('#download-video');
 
                         download_video_el.setAttribute('href', video_download_url);

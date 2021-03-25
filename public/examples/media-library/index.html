@@ -4,11 +4,11 @@
         <link rel="stylesheet" href="index.css">
         <script src="https://sdk.shakr.com/sdk.js"></script>
         <script>
-            async function loadMedias() {
+            async function loadMediaItems() {
                 const res = await fetch('/media-library.json', { method: 'GET' });
-                const medias = await res.json();
+                const media_items = await res.json();
 
-                return medias;
+                return media_items;
             }
 
             window.onload = () => {
@@ -16,7 +16,7 @@
                     const res = await fetch('/api/videos', { method: 'POST' });
                     const { render_session_id, edit_token } = await res.json();
 
-                    new ShakrEditor({
+                    const editor = await createShakrEditor({
                         access_token: edit_token,
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2',
@@ -29,12 +29,13 @@
                             }
                         ],
                         language: 'en'
-                    })
-                    .on('get_media', async ({ search_term, page, callback }) => {
-                        const medias = await loadMedias();
+                    });
+                    
+                    editor.on('get_media', async ({ search_term, page, callback }) => {
+                        const media_items = await loadMediaItems();
 
                         callback({
-                            medias: search_term ? medias.filter(media => media.title.includes(search_term)) : medias, // 'get_media' event is emitted with empty string search_term for full list search
+                            media_items: search_term ? media_items.filter(media => media.title.includes(search_term)) : media_items, // 'get_media' event is emitted with empty string search_term for full list search
                             page_total: 1
                         });
                     })

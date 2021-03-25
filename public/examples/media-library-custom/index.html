@@ -4,11 +4,11 @@
         <link rel="stylesheet" href="index.css">
         <script src="https://sdk.shakr.com/sdk.js"></script>
         <script>
-            async function loadMedias() {
+            async function loadMediaItems() {
                 const res = await fetch('/media-library.json', { method: 'GET' });
-                const medias = await res.json();
+                const media_items = await res.json();
 
-                return medias;
+                return media_items;
             }
 
             async function openMediaLibrary(callback) {
@@ -24,11 +24,11 @@
                 media_library_modal.style.display = 'flex';
                 media_library_loader.style.display = 'block';
 
-                const medias = await loadMedias();
+                const media_items = await loadMediaItems();
 
                 media_library_loader.style.display = 'none';
 
-                medias.forEach(media => {
+                media_items.forEach(media => {
                     const item = document.createElement('button');
                     const thumb = document.createElement('img');
 
@@ -37,7 +37,7 @@
                     item.onclick = () => {
                         media_library_modal.style.display = 'none';
 
-                        callback({ medias: [media] });
+                        callback({ media_items: [media] });
                     };
 
                     item.appendChild(thumb);
@@ -54,7 +54,7 @@
                     const res = await fetch('/api/videos', { method: 'POST' });
                     const { render_session_id, edit_token } = await res.json();
 
-                    new ShakrEditor({
+                    const editor = await createShakrEditor({
                         access_token: edit_token,
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2',
@@ -66,11 +66,11 @@
                                 custom_ui: true
                             }
                         ]
-                    })
-                    .on('open_media_library', ({ callback }) => {
+                    });
+
+                    editor.on('open_media_library', ({ callback }) => {
                         openMediaLibrary(callback);
-                    })
-                    .launch();
+                    }).launch();
                 }, false);
             }
         </script>

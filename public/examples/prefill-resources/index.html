@@ -17,11 +17,13 @@
                     });
                     const { render_session_id, edit_token } = await res.json();
 
-                    new ShakrEditor({
+                    const editor = await createShakrEditor({
                         access_token: edit_token,
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2'
-                    }).launch();
+                    });
+                    
+                    editor.launch();
                 }, false);
             }
         </script>
