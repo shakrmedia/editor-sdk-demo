@@ -2,7 +2,7 @@
 
 This is a usage example of Shakr's Editor SDK in Node.js.
 
-> **⚠️ Note:** Shakr Editor SDK is only available to Shakr Beyond customers. Please contect your account representative to get your API credentials, including Client ID and Client Secret.
+> **⚠️ Note:** Shakr Editor SDK is only available to Shakr Beyond customers. Please contact your account representative to get your API credentials, including Client ID and Client Secret.
 
 ## System requirements
 
