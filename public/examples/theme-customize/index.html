@@ -14,8 +14,19 @@
                         render_session_id,
                         api_url: 'https://api.shakr.com/v2',
                         theme: {
-                            appearance: 'light',
-                            accent_color: 'FF007B'
+                            logo: 'https://localhost:3000/examples/theme-customize/SplendidAirlines-color.png',
+                            appearance: 'browser',
+                            accent_color: 'FF007B',
+                            button_border_radius: 5,
+                            cancel_button_border_width: 1,
+                            dark_override: {
+                                header_footer_background_color: '040408',
+                                header_footer_border_color: 'F15B82',
+                            },
+                            light_override: {
+                                header_footer_background_color: 'F8F8FB',
+                                header_footer_border_color: 'F15B82'
+                            }
                         }
                     });
                     
