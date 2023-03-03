@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://sdk.shakr.com/sdk.js"></script>
+        <script type="module">
+            async function waitVideoRendering(render_session_id) {
+                while (true) {
+                    const res = await fetch(`/api/videos/${render_session_id}`);
+                    const render_session = await res.json();
+
+                    if (render_session.status === 'preview_rendered') {
+                        return render_session.video_url;
+                    }
+
+                    await new Promise(resolve => setTimeout(() => resolve(), 5000));
+                }
+            }
+
+            async function onEditorFinish(render_session_id) {
+                const start_wrap = document.querySelector('#start');
+                const rendering_wrap = document.querySelector('#rendering');
+                const result_wrap = document.querySelector('#result');
+
+                start_wrap.style.display = 'none';
+                rendering_wrap.style.display = 'flex';
+
+                const aspect_ratio_variation_render_res = await fetch(`/api/videos/aspect_ratio_variation`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ render_session_id })
+                });
+                const aspect_ratio_variation_render = await aspect_ratio_variation_render_res.json();
+
+                const [base_render_video_url, aspect_ratio_variation_video_url] = await Promise.all([
+                    waitVideoRendering(render_session_id),
+                    waitVideoRendering(aspect_ratio_variation_render.id)
+                ]);
+
+                const result_videos = result_wrap.querySelectorAll('video');
+
+                rendering_wrap.style.display = 'none';
+                result_wrap.style.display = 'flex';
+
+                result_videos[0].src = base_render_video_url;
+                result_videos[1].src = aspect_ratio_variation_video_url;
+            }
+
+            window.onload = () => {
+                document.querySelector('#start-editor').addEventListener('click', async () => {
+                    const res = await fetch('/api/videos', { method: 'POST' });
+                    const { render_session_id, edit_token } = await res.json();
+
+                    const editor = await createShakrEditor({
+                        access_token: edit_token,
+                        render_session_id,
+                        api_url: 'https://api.shakr.com/v2'
+                    });
+
+                    editor.on('finish', () => onEditorFinish(render_session_id)).launch();
+                }, false);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="start">
+            <h1>Shakr Editor SDK Basic Demo</h1>
+            <p>Press button below to open Shakr Editor embedded by SDK.</p>
+            <button class="sh-btn" id="start-editor">Start Editor</button>
+        </div>
+        <div id="rendering">Rendering Aspect Ratio Variation Video...</div>
+        <div id="result">
+            <h1>Results</h1>
+            <div class="videos">
+                <div>
+                    <video muted autoplay playsinline></video>
+                    <div>Base Video (9:16)</div>
+                </div>
+                <div>
+                    <video muted autoplay playsinline></video>
+                    <div>Aspect Ratio Variation Video (4:5)</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
